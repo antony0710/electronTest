@@ -1,7 +1,14 @@
+name: Build Electron App
+
+on:
+  push:
+    branches:
+      - main # 当你提交代码到 main 分支时自动触发
+  workflow_dispatch: # 允许你在 GitHub Actions 页面手动点击 "Run workflow" 按钮
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 直接在官方打包镜像中运行，环境最纯净
     container:
       image: electronuserland/builder:wine
 
@@ -12,4 +19,10 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npx electron-builder --win
+          # 明确指定目标平台和架构
+          npx electron-builder --win --x64
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: dist/*.exe # 确保路径指向你 electron-builder 输出的文件夹
