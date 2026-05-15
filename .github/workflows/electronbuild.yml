@@ -18,7 +18,7 @@ jobs:
 
       - name: Install and Build
         run: |
-          npm ci
+          npm install
           npm run build
           # 明确指定目标平台和架构
           npx electron-builder --win --x64
