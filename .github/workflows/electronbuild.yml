@@ -18,7 +18,8 @@ jobs:
 
       - name: Install and Build
         run: |
-          npm install
+          npm ci
+          npm run build
           # 明确指定目标平台和架构
           npx electron-builder --win --x64
       - name: Upload Build Artifacts
