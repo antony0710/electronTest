@@ -1,0 +1,15 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # 直接在官方打包镜像中运行，环境最纯净
+    container:
+      image: electronuserland/builder:wine
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install and Build
+        run: |
+          npm install
+          npx electron-builder --win
